@@ -38,22 +38,11 @@ public class BinarySearchTree<K> {
         this.comparator = comparator;
     }
 
-    @SuppressWarnings("unchecked")
-    private int compare(Object o1, Object o2) {
-        if (o1 == null) throw new NullPointerException();
-        return comparator.compare((K) o1, (K) o2);
-    }
-
-    private Node<K> parentOf(Node<K> node) {
-        return node == null ? null : node.parent;
-    }
-
-    private Node<K> leftOf(Node<K> node) {
-        return node == null ? null : node.left;
-    }
-
-    private Node<K> rightOf(Node<K> node) {
-        return node == null ? null : node.right;
+    /**
+     * 插入一个键。若键已存在，不做任何处理。
+     */
+    public void insert(@NotNull K key) {
+        searchAndInsertImpl(key, true);
     }
 
     private Node<K> searchAndInsertImpl(@NotNull K key, boolean needInsert) {
@@ -81,29 +70,6 @@ public class BinarySearchTree<K> {
         else
             p.right = new Node<>(key, p);
         return p;
-    }
-
-    private @NotNull Node<K> getSuccessor(@NotNull Node<K> node) {
-        Node<K> x = node.right;
-        Node<K> p = node;
-        while (x != null) {
-            p = x;
-            x = x.left;
-        }
-        if (p != node) return p;
-        x = node.left;
-        while (x != null) {
-            p = x;
-            x = x.right;
-        }
-        return p;
-    }
-
-    /**
-     * 插入一个键。若键已存在，不做任何处理。
-     */
-    public void insert(@NotNull K key) {
-        searchAndInsertImpl(key, true);
     }
 
     /**
@@ -145,6 +111,40 @@ public class BinarySearchTree<K> {
                 x = successor;
             }
         }
+    }
+
+    private @NotNull Node<K> getSuccessor(@NotNull Node<K> node) {
+        Node<K> x = node.right;
+        Node<K> p = node;
+        while (x != null) {
+            p = x;
+            x = x.left;
+        }
+        if (p != node) return p;
+        x = node.left;
+        while (x != null) {
+            p = x;
+            x = x.right;
+        }
+        return p;
+    }
+
+    @SuppressWarnings("unchecked")
+    private int compare(Object o1, Object o2) {
+        if (o1 == null) throw new NullPointerException();
+        return comparator.compare((K) o1, (K) o2);
+    }
+
+    private Node<K> parentOf(Node<K> node) {
+        return node == null ? null : node.parent;
+    }
+
+    private Node<K> leftOf(Node<K> node) {
+        return node == null ? null : node.left;
+    }
+
+    private Node<K> rightOf(Node<K> node) {
+        return node == null ? null : node.right;
     }
 
 }
