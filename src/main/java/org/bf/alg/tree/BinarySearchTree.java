@@ -31,9 +31,9 @@ public class BinarySearchTree<K> {
 
     private transient Node<K> root;
 
-    private final Comparator<? super K> comparator;
+    private final Comparator<K> comparator;
 
-    public BinarySearchTree(@NotNull Comparator<? super K> comparator) {
+    public BinarySearchTree(@NotNull Comparator<K> comparator) {
         this.root = null;
         this.comparator = comparator;
     }
@@ -107,7 +107,7 @@ public class BinarySearchTree<K> {
     }
 
     /**
-     * 删除指定的键。<br>
+     * 删除指定的键。
      */
     public void delete(@NotNull K key) {
         if (root == null) return;
