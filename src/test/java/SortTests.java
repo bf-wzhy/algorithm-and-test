@@ -7,16 +7,15 @@ import java.util.stream.Collectors;
 
 public class SortTests {
 
-    static Integer[] data;
+    Integer[] data;
 
     @BeforeEach
-    public void init() {
+    public void prepareData() {
         int size = 1<<20;
         data = new Integer[size];
         Random random = new Random();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
             data[i] = random.nextInt();
-        }
     }
 
     @RepeatedTest(8)

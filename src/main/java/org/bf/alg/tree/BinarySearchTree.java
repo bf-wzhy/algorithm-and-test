@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
 
-public class BinarySearchTree<K> {
+public class BinarySearchTree<K> implements Tree<K> {
 
     static final class Node<K> {
 
