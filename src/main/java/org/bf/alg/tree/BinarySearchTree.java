@@ -13,19 +13,9 @@ public class BinarySearchTree<K> {
         Node<K> left;
         Node<K> right;
 
-        Node(@NotNull K key, Node<K> parent, Node<K> left, Node<K> right) {
+        Node(K key, Node<K> parent) {
             this.key = key;
             this.parent = parent;
-            this.left = left;
-            this.right = right;
-        }
-
-        Node(K key, Node<K> parent) {
-            this(key, parent, null, null);
-        }
-
-        Node(K key) {
-            this(key, null);
         }
     }
 
@@ -61,7 +51,7 @@ public class BinarySearchTree<K> {
         }
         if (!needInsert) return null;
         if (p == null) {
-            root = new Node<>(key);
+            root = new Node<>(key, null);
             return root;
         }
         cmp = compare(key, p.key);
