@@ -1,8 +1,10 @@
 package org.bf.alg.tree;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Comparator;
 
-public class RedBlackTree<K> {
+public class RedBlackTree<K> implements Tree<K> {
 
     private static final boolean RED = false;
     private static final boolean BLACK = true;
@@ -255,7 +257,7 @@ public class RedBlackTree<K> {
         setColor(x, BLACK);
     }
 
-    public void insert(K key) {
+    public void insert(@NotNull K key) {
         Node<K> t = root;
         if (t == null) {
             root = new Node<>(key, null);
@@ -277,8 +279,6 @@ public class RedBlackTree<K> {
                     return;
             } while (t != null);
         } else {
-            if (key == null)
-                throw new NullPointerException();
             @SuppressWarnings("unchecked")
             Comparable<? super K> k = (Comparable<? super K>) key;
             do {
@@ -300,7 +300,7 @@ public class RedBlackTree<K> {
         fixAfterInsertion(e);
     }
 
-    public void delete(K key) {
+    public void delete(@NotNull K key) {
         Node<K> t = root;
         if (t == null) return;
         int cmp;
@@ -317,8 +317,6 @@ public class RedBlackTree<K> {
                     break;
             } while (t != null);
         } else {
-            if (key == null)
-                throw new NullPointerException();
             @SuppressWarnings("unchecked")
             Comparable<? super K> k = (Comparable<? super K>) key;
             do {
