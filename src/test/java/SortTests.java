@@ -3,31 +3,32 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SortTests {
-    static Integer[] array;
+
+    static Integer[] data;
+
     @BeforeEach
     public void init() {
-        int size = 1<<14;
-        array = new Integer[size];
+        int size = 1<<20;
+        data = new Integer[size];
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(100);
+            data[i] = random.nextInt();
         }
     }
 
     @RepeatedTest(8)
     public void sortTest() {
-        Sort<Integer> sort = new BucketSort<>();
-        sort.doSort(array, 0, array.length - 1, Comparator.comparingInt(o -> o));
-        boolean testResult = true;
-        for (int i = 0; i < array.length - 1; ++i) {
-            if (array[i] > array[i + 1]) {
-                testResult = false;
-                break;
-            }
-        }
-        assert testResult;
+        Integer[] testArray = Arrays.copyOf(data, data.length);
+        Integer[] standerArray = Arrays.copyOf(data, data.length);
+        Sort<Integer> sort = new ArraysBuiltinSort<>();
+        sort.doSort(testArray, 0, testArray.length - 1, Comparator.comparingInt(o -> o));
+        Arrays.sort(standerArray);
+        List<Integer> testList = Arrays.stream(testArray).sorted().collect(Collectors.toList());
+        List<Integer> standerList = Arrays.stream(standerArray).sorted().collect(Collectors.toList());
+        assert testList.equals(standerList);
     }
 
 }
